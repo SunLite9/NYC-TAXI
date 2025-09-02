@@ -24,6 +24,7 @@ models/
 .env.*
 # Keep Streamlit config but never commit secrets:
 .streamlit/secrets.toml
+*.csv
 
 # Streamlit cache
 .streamlit/cache/
