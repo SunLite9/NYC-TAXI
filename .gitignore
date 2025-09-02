@@ -1,0 +1,31 @@
+@'
+# Python
+__pycache__/
+*.py[cod]
+*.ipynb_checkpoints/
+*.DS_Store
+Thumbs.db
+
+# Virtual envs
+.venv/
+venv/
+
+# Local data / models (you keep these in GCS instead)
+data/
+models/
+*.pkl
+*.joblib
+
+# Credentials & secrets
+*.json
+*.key
+*.pem
+.env
+.env.*
+# Keep Streamlit config but never commit secrets:
+.streamlit/secrets.toml
+
+# Streamlit cache
+.streamlit/cache/
+.streamlit/state/
+'@ | Set-Content .gitignore
