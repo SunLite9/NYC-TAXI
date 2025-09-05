@@ -1,4 +1,4 @@
-# End-to-End NYC Taxi Fare Prediction and Analytics Pipeline 🚖
+# NYC Taxi Fare Prediction and Analytics Pipeline 🚖
 
 End-to-end machine learning pipeline for NYC Yellow Taxi data:  
 - Data ingestion and feature engineering in **BigQuery**  
