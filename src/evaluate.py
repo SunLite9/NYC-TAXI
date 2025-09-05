@@ -102,7 +102,7 @@ def eval_xgb():
     if "bucket" in df.columns:
         df.drop(columns=["bucket"], inplace=True)
 
-    # ---- Match training-time dtype cleanup ----
+    # Match training-time dtype cleanup
     df = df.replace({pd.NA: np.nan, None: np.nan, "": np.nan})
 
     cat_cols = [

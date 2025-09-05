@@ -12,13 +12,13 @@ import pydeck as pdk
 
 from google.cloud import bigquery, storage
 
-# ------------------- Config -------------------
+#  Config
 PROJECT = os.environ.get("GCP_PROJECT", "nyc-taxi-ml-rmadi-009")
 DATASET = os.environ.get("BQ_DATASET", "taxi_ds")
 BASE_TABLE = f"{PROJECT}.{DATASET}.yellow_2025_01"
 PUBLIC_ZONES = "bigquery-public-data.new_york_taxi_trips.taxi_zone_geom"
 
-# --- Eval-on-startup config (prints to terminal only) ---
+# Eval-on-startup config (prints to terminal only) 
 FEATURE_VIEW = os.environ.get(
     "FEATURE_VIEW",
     f"{PROJECT}.{DATASET}.vw_features_total_amount"  # must contain model features + total_amount
@@ -33,7 +33,7 @@ MODEL_URI = os.environ.get(
     f"gs://{PROJECT}-models/xgb/xgb_total_amount.pkl"  # override if your model is in the data bucket
 )
 
-# ------------------- Clients & helpers -------------------
+# Clients & helpers
 @st.cache_resource(show_spinner=False)
 def get_bq_client():
     return bigquery.Client(project=PROJECT)
@@ -105,7 +105,7 @@ def load_model():
     return pickle.loads(data)
 
 
-# --- Eval-on-startup config (already added earlier) ---
+# Eval-on-startup config (already added earlier) 
 from sklearn.metrics import mean_squared_error, r2_score
 
 FEATURE_COLS = [
@@ -210,7 +210,7 @@ def print_metrics_once_on_startup():
 
 
 
-# ------------------- Shared SQL snippets -------------------
+# Shared SQL snippets 
 RATE_CODE_MAPPING = """
 CASE CAST(y.RatecodeID AS INT64)
   WHEN 1 THEN 'Standard rate'
@@ -281,7 +281,7 @@ def rows_after_filter(params: Dict[str, Any]) -> int:
     df = bq_df(sql, params)
     return int(df["n"].iloc[0]) if not df.empty else 0
 
-# ------------------- Sidebar filters -------------------
+# Sidebar filters 
 @st.cache_data(show_spinner=False)
 def get_filter_options():
     sql = f"""
@@ -456,7 +456,7 @@ def sidebar_filters():
 
 
 
-# ------------------- KPI / Analytics queries -------------------
+# KPI / Analytics queries
 def kpis(params: Dict[str, Any]) -> pd.DataFrame:
     sql = f"""
     {BASE_CTE}
@@ -591,7 +591,7 @@ def selection_count(params: Dict[str, Any]) -> int:
     return int(bq_df(sql, params).iloc[0]["n"])
 
 
-# ------------------- UI blocks -------------------
+# UI blocks
 def show_kpi_tiles(df: pd.DataFrame):
     c1, c2, c3, c4, c5, c6 = st.columns(6)
     if df.empty:
@@ -713,7 +713,7 @@ def show_pickup_map(df: pd.DataFrame):
 
 
 
-# ------------------- Prediction tab -------------------
+# Prediction tab 
 
 import datetime as dt
 

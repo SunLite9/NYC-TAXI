@@ -13,19 +13,18 @@ from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
 import xgboost as xgb
 
-# ---------------- Config ----------------
+#Config 
 PROJECT = os.environ.get("GCP_PROJECT", "nyc-taxi-ml-rmadi-009")
 DATASET = os.environ.get("BQ_DATASET", "taxi_ds")
 FEATURE_VIEW = f"{PROJECT}.{DATASET}.vw_features_total_amount"
-MODEL_BUCKET = os.environ.get("MODEL_BUCKET", f"{PROJECT}-models")  # e.g. nyc-taxi-ml-rmadi-009-models
+MODEL_BUCKET = os.environ.get("MODEL_BUCKET", f"{PROJECT}-models")  #  nyc-taxi-ml-rmadi-009-models
 MODEL_BLOB = os.environ.get("MODEL_BLOB", "xgb/xgb_total_amount.pkl")
 LOCAL_MODEL_PATH = os.environ.get("LOCAL_MODEL_PATH", "xgb_total_amount.pkl")
 
-# Optional: sample fraction for faster first runs, e.g. BQ_SAMPLE_FRACTION=0.25
 SAMPLE_FRACTION = float(os.environ.get("BQ_SAMPLE_FRACTION", "1.0"))
 SAMPLE_CLAUSE = "" if SAMPLE_FRACTION >= 1.0 else f"WHERE RAND() < {SAMPLE_FRACTION}"
 
-# ---------------- Helpers ----------------
+# Helpers
 def query_to_dataframe(sql: str) -> pd.DataFrame:
     """Force REST (no BigQuery Storage / gRPC). Use BQ Storage only if explicitly allowed."""
     client = bigquery.Client(project=PROJECT)
@@ -51,7 +50,7 @@ def query_to_dataframe(sql: str) -> pd.DataFrame:
         return pandas_gbq.read_gbq(sql, project_id=PROJECT, dialect="standard")
 
 
-# ---------------- Data ----------------
+# Data
 def fetch_train_valid() -> Tuple[pd.DataFrame, pd.DataFrame, np.ndarray, np.ndarray]:
     """
     Pull features from BigQuery using same hash split as BQML:
@@ -86,7 +85,7 @@ def fetch_train_valid() -> Tuple[pd.DataFrame, pd.DataFrame, np.ndarray, np.ndar
     valid.drop(columns=["bucket"], inplace=True)
     return train, valid, y_train, y_valid
 
-# ---------------- Model ----------------
+# Model 
 def build_pipeline(cat_cols, num_cols) -> Pipeline:
     try:
         ohe = OneHotEncoder(handle_unknown="ignore", sparse_output=False)
