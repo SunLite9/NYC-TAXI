@@ -5,7 +5,7 @@ End-to-end machine learning pipeline for NYC Yellow Taxi data:
 - Baseline modeling with **BigQuery ML**  
 - Advanced modeling with **XGBoost (Python)**  
 - Model storage in **Google Cloud Storage (GCS)**  
-- **Streamlit dashboard** for interactive insights and fare prediction  
+- **Streamlit dashboard** and **Power BI reports** for interactive insights and fare prediction  
 
 ---
 
@@ -17,7 +17,7 @@ End-to-end machine learning pipeline for NYC Yellow Taxi data:
 3. **Evaluate Models**  
    Run the evaluation script to compare BQML and XGBoost.  
 4. **Run App**  
-Launch the Streamlit dashboard to explore insights and predict fares.  
+Launch the Streamlit dashboard or open Power BI reports to explore insights and predict fares.  
 
 ---
 
@@ -106,12 +106,26 @@ This interface allows non-technical users to explore the data and interact direc
 
 ---
 
+### 6. Power BI Reports  
+
+Complementing Streamlit, **Power BI dashboards** were created to:  
+- Provide slicer-aware KPI cards for revenue, average fare, trip counts, and cancellations.  
+- Visualize payment method distribution, top pickup/dropoff routes, and trip distance ranges interactively.  
+- Support executive-style reporting with clean themes, filters, and drill-down functionality.  
+
+These reports give stakeholders a polished, business-facing view of the pipeline’s outputs and trends.  
+
+![Power BI Dashboard Screenshot](https://github.com/SunLite9/NYC-Taxi-Fare-Prediction-and-Analytics-Pipeline/raw/main/nyc-taxi-powerbi-analytics-pic.png)
+
+---
+
 ## Tech Stack
 - **BigQuery**: data storage, feature engineering, baseline ML  
 - **BigQuery ML**: linear regression baseline  
 - **Google Cloud Storage**: model storage  
 - **Python (pandas, scikit-learn, XGBoost)**: advanced model training and evaluation  
-- **Streamlit**: interactive dashboard for insights and predictions  
+- **Streamlit**: interactive dashboard for insights and predictions
+- **Power BI**: business intelligence dashboards and executive reporting
 
 ---
 
