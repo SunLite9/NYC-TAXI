@@ -129,4 +129,4 @@ These reports give stakeholders a polished, business-facing view of the pipeline
 
 ---
 
-The pipeline runs end-to-end: raw trip data → BigQuery feature engineering → baseline ML → advanced XGBoost training and evaluation → live analytics and predictions in Streamlit.  
+The pipeline runs end-to-end: raw trip data → BigQuery feature engineering → baseline ML → advanced XGBoost training and evaluation → live analytics and predictions in Streamlit and Power BI.  
